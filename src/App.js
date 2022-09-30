@@ -19,7 +19,7 @@ function ItemInputNumber(props) {
     <Flex 
       gap={'12px'}
       align={'center'}
-      w={'550px'}>
+      w={'450px'}>
       <Text flex={2}>
         { props.label ?? '' }{ props.required &&  <span style={{ color: 'red' }}>*</span> }
       </Text>
@@ -51,8 +51,8 @@ function App() {
     rencana_investasi_bulanan: 2.5e6
   });
   const [tex_data, setTexData] = useState('');
-  const C = Math.pow(parseFloat(data.return_tahunan) + 1, 1 / 12);
-  const C_0_to_t_1 = Array(data.lama_investasi_dalam_bulan ?? 0).fill(0).reduce((a, _, i) => a + Math.pow(C, i), 0);
+  const C = parseFloat(Math.pow(parseFloat(data.return_tahunan) + 1, 1 / 12));
+  const C_0_to_t_1 = parseFloat(Array(parseInt(data.lama_investasi_dalam_bulan) ?? 0).fill(0).reduce((a, _, i) => a + parseFloat(Math.pow(C, i)), 0.00));
   const C_to_t = Math.pow(C, data.lama_investasi_dalam_bulan);
   const I = (data.target_investasi - data.nilai_investasi_awal * C_to_t) / C_0_to_t_1;
 
